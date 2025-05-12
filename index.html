@@ -263,77 +263,6 @@
             setInterval(showNextImage, 3000); // Change image every 3 seconds (3000 ms)
         }
 
-        // --- English to Urdu Transliteration Functions ---
-        // یہ ایک سادہ فونیٹک ٹرانسلیٹریشن ہے اور صحیح نام کا ترجمہ نہیں ہے۔
-        // درست ترجمے کے لیے ایک سرور سائیڈ API کی ضرورت ہو گی جو ایک سنگل HTML فائل میں ممکن نہیں۔
-        function transliterateEnglishToUrdu(text) {
-            // Ordered from longest matches to shortest for correct parsing
-            const mapping = {
-                'sh': 'ش', 'kh': 'خ', 'gh': 'غ', 'ch': 'چ', 'ph': 'ف', 'th': 'تھ', 'dh': 'دھ', 'zh': 'ژ', // Two-char consonants
-                'aa': 'ا', 'ee': 'ی', 'oo': 'و', // Common vowel combinations (can be improved)
-
-                'a': 'ا', 'b': 'ب', 'p': 'پ', 't': 'ت', 'd': 'د', 'j': 'ج', 'k': 'ک', 'l': 'ل',
-                'm': 'م', 'n': 'ن', 's': 'س', 'z': 'ز', 'r': 'ر', 'f': 'ف', 'q': 'ق', 'h': 'ہ',
-                'w': 'و', 'v': 'و', 'y': 'ی', 'e': 'ی', 'i': 'ی', 'o': 'و', 'u': 'و',
-
-                'c': 'ک', // Default for 'c'
-                'x': 'کس', // As in 'box'
-                'g': 'گ', // Default for 'g'
-            };
-
-            let result = '';
-            let i = 0;
-            while (i < text.length) {
-                let matched = false;
-                let currentText = text.substring(i).toLowerCase();
-
-                // Try matching longest keys first (e.g., 'sh' before 's')
-                for (const key in mapping) {
-                    if (currentText.startsWith(key)) {
-                        result += mapping [key];
-                        i += key.length;
-                        matched = true;
-                        break; // Found a match, move to next part of text
-                    }
-                }
-
-                if (!matched) {
-                    // If no mapping found, append the character as is (e.g., numbers, punctuation, spaces, special characters)
-                    result += text [i];
-                    i++;
-                }
-            }
-            return result;
-        }
-
-        // Function to check if a string is predominantly English characters
-        function isPredominantlyEnglish(text) {
-            let englishChars = 0;
-            let urduChars = 0;
-            for (let i = 0; i < text.length; i++) {
-                const charCode = text.charCodeAt(i);
-                // Latin characters (A-Z, a-z)
-                if ((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122)) {
-                    englishChars++;
-                }
-                // Arabic/Urdu script characters (common ranges for Urdu in Unicode)
-                // U+0600 to U+06FF is the general Arabic script range
-                // U+0750 to U+077F is Arabic Supplement
-                // U+FB50 to U+FDFF is Arabic Presentation Forms-A
-                // U+FE70 to U+FEFF is Arabic Presentation Forms-B
-                else if ((charCode >= 0x0600 && charCode <= 0x06FF) ||
-                         (charCode >= 0x0750 && charCode <= 0x077F) ||
-                         (charCode >= 0xFB50 && charCode <= 0xFDFF) ||
-                         (charCode >= 0xFE70 && charCode <= 0xFEFF)) {
-                    urduChars++;
-                }
-            }
-            // If there are more English characters, consider it predominantly English
-            return englishChars > urduChars;
-        }
-        // --- End of Transliteration Functions ---
-
-
         // User Name and Share JavaScript
         const userNameInput = document.getElementById('userName');
         const shareButton = document.getElementById('shareButton');
@@ -358,10 +287,8 @@
             let userName = userNameInput.value.trim();
 
             if (userName) {
-                // Convert name to Urdu if it's predominantly English
-                if (isPredominantlyEnglish(userName)) {
-                    userName = transliterateEnglishToUrdu(userName);
-                }
+                // The English to Urdu transliteration functionality has been removed.
+                // The name will be used as entered by the user.
 
                 // Add user to the list if not already present
                 if (!usersCursedIsrael.includes(userName)) {
