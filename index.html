@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اسرائیل پہ لعنت</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Nastaliq Urdu', sans-serif;
+            /* Subtle Fiery Background */
+            background: radial-gradient(circle at top center, rgba(255,140,0,0.15) 0%, transparent 50%), /* Subtle top glow */
+                        radial-gradient(circle at bottom center, rgba(255,69,0,0.1) 0%, transparent 50%), /* Subtle bottom glow */
+                        #f0f2f5; /* Base background color */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            line-height: 1.6; /* Improved readability */
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #d9534f; /* Existing red color for emphasis */
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            position: relative; /* Needed for z-index or if pseudo-elements were used */
+            z-index: 1;
+
+            /* Fire Glow Effect */
+            animation: fireGlow 1.8s infinite alternate ease-in-out,
+                       vibrate 0.15s infinite alternate; /* Added vibrate animation */
+            text-shadow: 0 0 8px rgba(255, 69, 0, 0.7), /* Darker orange/red */
+                         0 0 15px rgba(255, 140, 0, 0.5), /* Orange */
+                         0 0 25px rgba(255, 215, 0, 0.3); /* Yellow */
+        }
+
+        @keyframes fireGlow {
+            0% {
+                text-shadow: 0 0 8px rgba(255, 69, 0, 0.7),
+                             0 0 15px rgba(255, 140, 0, 0.5),
+                             0 0 25px rgba(255, 215, 0, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 12px rgba(255, 69, 0, 0.9), /* Brighter, more intense */
+                             0 0 20px rgba(255, 140, 0, 0.7),
+                             0 0 35px rgba(255, 215, 0, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 8px rgba(255, 69, 0, 0.7),
+                             0 0 15px rgba(255, 140, 0, 0.5),
+                             0 0 25px rgba(255, 215, 0, 0.3);
+            }
+        }
+
+        @keyframes vibrate {
+            0% {
+                transform: translate(1px, 1px) rotate(0.5deg);
+            }
+            100% {
+                transform: translate(-1px, -2px) rotate(-1deg);
+            }
+        }
+
+        .slider-container {
+            width: 100%;
+            max-width: 700px; /* Adjust max-width as needed */
+            aspect-ratio: 16 / 9; /* New: Responsive aspect ratio (width:height) */
+            margin: 0 auto 30px auto;
+            overflow: hidden;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); /* Adjusted shadow for more depth */
+        }
+        .slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures images cover the area without distortion */
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out; /* Fade animation */
+        }
+        .slider-image.active {
+            opacity: 1;
+        }
+        .input-section {
+            margin-bottom: 30px;
+        }
+        .input-section p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .input-section input {
+            width: calc(100% - 30px); /* Adjusted width for padding */
+            max-width: 400px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Noto Nastaliq Urdu', sans-serif;
+            font-size: 1.1em;
+            text-align: right; /* Align text to the right for RTL */
+            box-sizing: border-box; /* Crucial for responsive input sizing */
+        }
+        .input-section button {
+            background-color: #5cb85c; /* Green color for share button */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Noto Nastaliq Urdu', sans-serif;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .input-section button:hover {
+            background-color: #4cae4c;
+        }
+        .user-list-section {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            text-align: right; /* Align text to the right for RTL */
+        }
+        .user-list-section h2 {
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .user-list {
+            list-style: none;
+            padding: 0;
+            max-height: 300px; /* Limit height for scroll if many names */
+            overflow-y: auto; /* Add scrollbar if content overflows */
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .user-list li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: flex-end; /* Align text to the right */
+            align-items: center;
+            direction: rtl; /* Ensure RTL for list items */
+            font-family: 'Noto Nastaliq Urdu', sans-serif;
+        }
+        .user-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Media Queries for Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px auto;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em; /* Smaller font size for mobile */
+            }
+            .slider-container {
+                aspect-ratio: 4 / 3; /* Adjust aspect ratio for potentially squarer images on mobile */
+                max-width: 100%; /* Ensure it takes full width minus container padding */
+                margin-bottom: 20px; /* Reduce margin */
+            }
+            .input-section p {
+                font-size: 1.1em; /* Slightly smaller text */
+            }
+            .input-section input {
+                width: calc(100% - 20px); /* Adjusted for smaller screens */
+                padding: 10px; /* Slightly less padding */
+                font-size: 1em;
+            }
+            .input-section button {
+                padding: 10px 20px;
+                font-size: 1.1em;
+                width: 100%; /* Make button full width */
+                margin-top: 10px; /* Add some space above button */
+            }
+            .user-list-section h2 {
+                font-size: 1.5em;
+            }
+            .user-list li {
+                font-size: 1em;
+                padding: 8px;
+            }
+        }
+
+        /* Optional: Further adjust for very small screens if necessary */
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            .slider-container {
+                aspect-ratio: 3 / 2; /* Or adjust as needed for smaller devices */
+            }
+            .input-section input {
+                font-size: 0.95em;
+            }
+            .input-section button {
+                font-size: 1em;
+                padding: 8px 15px;
+            }
+            .user-list li {
+                font-size: 0.9em;
+                padding: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>اسرائیل پہ لعنت</h1>
+
+        <div class="slider-container">
+            <img src="1.jpg" alt="Image 1" class="slider-image active">
+            <img src="2.jpg" alt="Image 2" class="slider-image">
+            <img src="3.jpg" alt="Image 3" class="slider-image">
+            <img src="4.jpg" alt="Image 4" class="slider-image">
+        </div>
+
+        <div class="input-section">
+            <p>آپ اسرائیل پہ لعنت بھیج رہے ہیں، اپنا نام لکھیں، اور شیئر کریں</p>
+            <input type="text" id="userName" placeholder="یہاں اپنا نام لکھیں">
+            <button id="shareButton">شیئر کریں</button>
+        </div>
+
+        <div class="user-list-section">
+            <h2>جنہوں نے لعنت بھیجی ہے</h2>
+            <ul id="cursedUserList" class="user-list">
+                </ul>
+        </div>
+    </div>
+
+    <script>
+        // Slider JavaScript
+        const images = document.querySelectorAll('.slider-image');
+        let currentImageIndex = 0;
+
+        function showNextImage() {
+            if (images.length === 0) return;
+            images [currentImageIndex].classList.remove('active');
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            images [currentImageIndex].classList.add('active');
+        }
+
+        // Start slider only if there are images
+        if (images.length > 0) {
+            setInterval(showNextImage, 3000); // Change image every 3 seconds (3000 ms)
+        }
+
+        // --- English to Urdu Transliteration Functions ---
+        // یہ ایک سادہ فونیٹک ٹرانسلیٹریشن ہے اور صحیح نام کا ترجمہ نہیں ہے۔
+        // درست ترجمے کے لیے ایک سرور سائیڈ API کی ضرورت ہو گی جو ایک سنگل HTML فائل میں ممکن نہیں۔
+        function transliterateEnglishToUrdu(text) {
+            // Ordered from longest matches to shortest for correct parsing
+            const mapping = {
+                'sh': 'ش', 'kh': 'خ', 'gh': 'غ', 'ch': 'چ', 'ph': 'ف', 'th': 'تھ', 'dh': 'دھ', 'zh': 'ژ', // Two-char consonants
+                'aa': 'ا', 'ee': 'ی', 'oo': 'و', // Common vowel combinations (can be improved)
+
+                'a': 'ا', 'b': 'ب', 'p': 'پ', 't': 'ت', 'd': 'د', 'j': 'ج', 'k': 'ک', 'l': 'ل',
+                'm': 'م', 'n': 'ن', 's': 'س', 'z': 'ز', 'r': 'ر', 'f': 'ف', 'q': 'ق', 'h': 'ہ',
+                'w': 'و', 'v': 'و', 'y': 'ی', 'e': 'ی', 'i': 'ی', 'o': 'و', 'u': 'و',
+
+                'c': 'ک', // Default for 'c'
+                'x': 'کس', // As in 'box'
+                'g': 'گ', // Default for 'g'
+            };
+
+            let result = '';
+            let i = 0;
+            while (i < text.length) {
+                let matched = false;
+                let currentText = text.substring(i).toLowerCase();
+
+                // Try matching longest keys first (e.g., 'sh' before 's')
+                for (const key in mapping) {
+                    if (currentText.startsWith(key)) {
+                        result += mapping [key];
+                        i += key.length;
+                        matched = true;
+                        break; // Found a match, move to next part of text
+                    }
+                }
+
+                if (!matched) {
+                    // If no mapping found, append the character as is (e.g., numbers, punctuation, spaces, special characters)
+                    result += text [i];
+                    i++;
+                }
+            }
+            return result;
+        }
+
+        // Function to check if a string is predominantly English characters
+        function isPredominantlyEnglish(text) {
+            let englishChars = 0;
+            let urduChars = 0;
+            for (let i = 0; i < text.length; i++) {
+                const charCode = text.charCodeAt(i);
+                // Latin characters (A-Z, a-z)
+                if ((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122)) {
+                    englishChars++;
+                }
+                // Arabic/Urdu script characters (common ranges for Urdu in Unicode)
+                // U+0600 to U+06FF is the general Arabic script range
+                // U+0750 to U+077F is Arabic Supplement
+                // U+FB50 to U+FDFF is Arabic Presentation Forms-A
+                // U+FE70 to U+FEFF is Arabic Presentation Forms-B
+                else if ((charCode >= 0x0600 && charCode <= 0x06FF) ||
+                         (charCode >= 0x0750 && charCode <= 0x077F) ||
+                         (charCode >= 0xFB50 && charCode <= 0xFDFF) ||
+                         (charCode >= 0xFE70 && charCode <= 0xFEFF)) {
+                    urduChars++;
+                }
+            }
+            // If there are more English characters, consider it predominantly English
+            return englishChars > urduChars;
+        }
+        // --- End of Transliteration Functions ---
+
+
+        // User Name and Share JavaScript
+        const userNameInput = document.getElementById('userName');
+        const shareButton = document.getElementById('shareButton');
+        const cursedUserList = document.getElementById('cursedUserList');
+
+        // Load names from localStorage or initialize an empty array
+        let usersCursedIsrael = JSON.parse(localStorage.getItem('usersCursedIsrael')) || [];
+
+        function renderUserList() {
+            cursedUserList.innerHTML = ''; // Clear existing list
+            usersCursedIsrael.forEach(name => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${name} نے اسرائیل پہ لعنت بھیجی ہے`;
+                cursedUserList.appendChild(listItem);
+            });
+        }
+
+        // Initial rendering when the page loads
+        renderUserList();
+
+        shareButton.addEventListener('click', async () => {
+            let userName = userNameInput.value.trim();
+
+            if (userName) {
+                // Convert name to Urdu if it's predominantly English
+                if (isPredominantlyEnglish(userName)) {
+                    userName = transliterateEnglishToUrdu(userName);
+                }
+
+                // Add user to the list if not already present
+                if (!usersCursedIsrael.includes(userName)) {
+                    usersCursedIsrael.push(userName);
+                    localStorage.setItem('usersCursedIsrael', JSON.stringify(usersCursedIsrael));
+                    renderUserList();
+                }
+
+                const pageUrl = window.location.href; // Get the current page URL
+                const shareText = `${userName} نے اسرائیل پہ لعنت بھیجی ہے، آپ بھی لعنت بھیجیں: ${pageUrl}`;
+
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            title: 'اسرائیل پہ لعنت',
+                            text: shareText,
+                            url: pageUrl
+                        });
+                        // alert('پیغام کامیابی سے شیئر ہو گیا!'); // Removed alert for smoother UX
+                    } catch (error) {
+                        console.error('شیئر کرنے میں مسئلہ ہوا:', error);
+                        // Fallback: Copy text to clipboard if share fails or not supported
+                        const tempTextArea = document.createElement('textarea');
+                        tempTextArea.value = shareText;
+                        tempTextArea.style.position = 'fixed'; // Make it invisible
+                        tempTextArea.style.top = '0';
+                        tempTextArea.style.left = '0';
+                        tempTextArea.style.opacity = '0';
+                        document.body.appendChild(tempTextArea);
+                        tempTextArea.focus();
+                        tempTextArea.select();
+
+                        try {
+                            document.execCommand('copy');
+                            alert('شیئر کرنے میں ناکامی۔ پیغام کو کاپی کیا گیا ہے، آپ اسے دستی طور پر پیسٹ کر سکتے ہیں۔');
+                        } catch (err) {
+                            alert('شیئر کرنے میں ناکامی۔ براہ کرم پیغام کو دستی طور پر کاپی کریں: ' + shareText);
+                        }
+                        document.body.removeChild(tempTextArea);
+                    }
+                } else {
+                    // Fallback for browsers that do not support navigator.share
+                    const tempTextArea = document.createElement('textarea');
+                    tempTextArea.value = shareText;
+                    tempTextArea.style.position = 'fixed'; // Make it invisible
+                    tempTextArea.style.top = '0';
+                    tempTextArea.style.left = '0';
+                    tempTextArea.style.opacity = '0';
+                    document.body.appendChild(tempTextArea);
+                    tempTextArea.focus();
+                    tempTextArea.select();
+
+                    try {
+                        document.execCommand('copy');
+                        alert('آپ کا براؤزر شیئر فنکشن کو سپورٹ نہیں کرتا ہے۔ پیغام کو کاپی کیا گیا ہے، آپ اسے دستی طور پر پیسٹ کر سکتے ہیں۔');
+                    } catch (err) {
+                        alert('آپ کا براؤزر شیئر فنکشن کو سپورٹ نہیں کرتا ہے۔ براہ کرم پیغام کو دستی طور پر کاپی کریں: ' + shareText);
+                    }
+                    document.body.removeChild(tempTextArea);
+                }
+
+                userNameInput.value = ''; // Clear the input field
+            } else {
+                alert('براہ کرم اپنا نام درج کریں۔');
+            }
+        });
+    </script>
+</body>
+</html>
